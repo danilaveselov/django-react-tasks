@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 // Material UI
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddTaskIcon from "@mui/icons-material/AddTask";
 import AppsIcon from "@mui/icons-material/Apps";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import HistoryIcon from "@mui/icons-material/History";
+import SettingsIcon from "@mui/icons-material/Settings";
 import StarIcon from "@mui/icons-material/Star";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
@@ -13,27 +14,32 @@ import TabPanel from "@mui/lab/TabPanel";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActionArea from "@mui/material/CardActionArea";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
+// Local Components
+import TaskForm from "./TaskForm";
+import TaskStepper from "./TaskStepper";
+import TileForm from "./TileForm";
+import TileStatusAvatar from "./TileStatusAvatar";
 // Other
 import { format } from "date-fns";
-import TileForm from "./TileForm";
 
 const TileList = () => {
-    const [value, setValue] = useState("0");
+    const [filterStatus, setFilterStatus] = useState("0");
     const [tiles, setTiles] = useState([]);
     const [showTileDialog, setShowTileDialog] = useState(false);
+    const [showTaskDialog, setShowTaskDialog] = useState(false);
     const [selectedTile, setSelectedTile] = useState(null);
+    const [selectedTask, setSelectedTask] = useState(null);
 
     const handleFetch = () => {
         fetch("http://localhost:8000/api/tiles/")
             .then((response) => response.json())
             .then((data) => {
+                data.sort((a, b) => new Date(b.launch_date) - new Date(a.launch_date));
                 setTiles(data);
             })
             .catch((error) => {
@@ -70,6 +76,18 @@ const TileList = () => {
         setShowTileDialog(false);
     };
 
+    const handleOpenTaskDialog = (tile = null, task = null) => {
+        setSelectedTask(task);
+        setSelectedTile(tile);
+        setShowTaskDialog(true);
+    };
+
+    const handleCloseTaskDialog = () => {
+        setSelectedTask(null);
+        setSelectedTile(null);
+        setShowTaskDialog(false);
+    };
+
     useEffect(() => {
         handleFetch();
     }, []);
@@ -81,30 +99,35 @@ const TileList = () => {
             <Grid container spacing={2}>
                 {filteredTiles.map((tile) => (
                     <Grid key={tile.id} item xs={4}>
-                        <Card>
-                            <CardActionArea onClick={() => console.log("Test")}>
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div" textAlign="center">
-                                        Tile #{tile.id}
-                                    </Typography>
-                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        {format(new Date(tile.launch_date), "MMMM dd, yyyy")}
-                                    </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions disableSpacing>
-                                <IconButton
-                                    onClick={() => {
-                                        handleOpenEditTileDialog(tile);
-                                    }}
-                                    aria-label="edit tile"
-                                >
-                                    <EditIcon />
-                                </IconButton>
-                                <IconButton onClick={() => handleDelete(tile.id)} aria-label="delete tile">
-                                    <DeleteIcon />
-                                </IconButton>
-                            </CardActions>
+                        <Card sx={{ height: "100%" }}>
+                            <CardHeader
+                                avatar={<TileStatusAvatar status={tile.status} />}
+                                title={`Tile #${tile.id}`}
+                                subheader={format(new Date(tile.launch_date), "MMMM dd, yyyy")}
+                                action={
+                                    <>
+                                        <IconButton onClick={() => handleOpenTaskDialog(tile)} aria-label="add task">
+                                            <AddTaskIcon />
+                                        </IconButton>
+                                        <IconButton onClick={() => handleDelete(tile.id)} aria-label="delete tile">
+                                            <DeleteIcon />
+                                        </IconButton>
+                                        <IconButton
+                                            onClick={() => {
+                                                handleOpenEditTileDialog(tile);
+                                            }}
+                                            aria-label="edit tile"
+                                        >
+                                            <SettingsIcon />
+                                        </IconButton>
+                                    </>
+                                }
+                            />
+                            <CardContent>
+                                {tile.tasks.length > 0 && (
+                                    <TaskStepper tasks={tile.tasks} handleEdit={handleOpenTaskDialog} handleRefresh={handleFetch} />
+                                )}
+                            </CardContent>
                         </Card>
                     </Grid>
                 ))}
@@ -114,12 +137,12 @@ const TileList = () => {
 
     return (
         <>
-            <TabContext value={value}>
+            <TabContext value={filterStatus}>
                 <Card>
                     <TabList
-                        value={value}
+                        value={filterStatus}
                         onChange={(event, newValue) => {
-                            setValue(newValue);
+                            setFilterStatus(newValue);
                         }}
                         aria-label="tabs"
                         indicatorColor="secondary"
@@ -137,13 +160,13 @@ const TileList = () => {
                     <TilesGrid />
                 </TabPanel>
                 <TabPanel value="1">
-                    <TilesGrid status={value} />
+                    <TilesGrid status={filterStatus} />
                 </TabPanel>
                 <TabPanel value="2">
-                    <TilesGrid status={value} />
+                    <TilesGrid status={filterStatus} />
                 </TabPanel>
                 <TabPanel value="3">
-                    <TilesGrid status={value} />
+                    <TilesGrid status={filterStatus} />
                 </TabPanel>
                 <Box marginTop={2} display="flex" justifyContent="center">
                     <Button
@@ -161,6 +184,14 @@ const TileList = () => {
             </TabContext>
             {showTileDialog && (
                 <TileForm onClose={handleCloseTileDialog} handleRefresh={handleFetch} tile={selectedTile} />
+            )}
+            {showTaskDialog && (
+                <TaskForm
+                    onClose={handleCloseTaskDialog}
+                    handleRefresh={handleFetch}
+                    tile={selectedTile}
+                    task={selectedTask}
+                />
             )}
         </>
     );
