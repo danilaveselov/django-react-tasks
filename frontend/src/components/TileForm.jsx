@@ -74,7 +74,7 @@ const TileForm = ({ onClose, handleRefresh, tile = null }) => {
     return (
         <>
             <Dialog open={true}>
-                <DialogTitle>{tile ? `Edit Tile #${tile.id}` : "New Tile"}</DialogTitle>
+                <DialogTitle>{tile ? "Edit Tile" : "New Tile"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>{tile ? `Editing tile #${tile.id}` : "Create a new tile"}</DialogContentText>
                     <Select
@@ -84,6 +84,7 @@ const TileForm = ({ onClose, handleRefresh, tile = null }) => {
                         label="Status"
                         onChange={(e) => setStatus(e.target.value)}
                         fullWidth
+                        sx={{ mb: 1 }}
                     >
                         <MenuItem value={1}>Live</MenuItem>
                         <MenuItem value={2}>Pending</MenuItem>
