@@ -26,7 +26,7 @@ import TileForm from "./TileForm";
 import TileStatusAvatar from "./TileStatusAvatar";
 // Other
 import { format } from "date-fns";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const TileList = () => {
     const [filterStatus, setFilterStatus] = useState("0");
@@ -58,7 +58,7 @@ const TileList = () => {
             .then((response) => {
                 if (response.ok) {
                     handleFetch();
-                    toast.success("Tile deleted")
+                    toast.success("Tile deleted");
                 } else {
                     console.error("Error:", response.statusText);
                 }

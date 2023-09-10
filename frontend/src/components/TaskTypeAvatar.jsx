@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 // Icons
-import ChatIcon from '@mui/icons-material/Chat';
-import ImportContactsIcon from '@mui/icons-material/ImportContacts';
-import PollIcon from '@mui/icons-material/Poll';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import ChatIcon from "@mui/icons-material/Chat";
+import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+import PollIcon from "@mui/icons-material/Poll";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 // Material UI
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
+import Avatar from "@mui/material/Avatar";
+import Tooltip from "@mui/material/Tooltip";
 
 const TaskTypeAvatar = ({ type }) => {
     switch (type) {

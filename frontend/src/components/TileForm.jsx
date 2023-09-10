@@ -11,7 +11,7 @@ import Select from "@mui/material/Select";
 import { DatePicker } from "@mui/x-date-pickers";
 // Other
 import { format } from "date-fns";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const TileForm = ({ onClose, handleRefresh, tile = null }) => {
     const [status, setStatus] = useState(tile ? tile.status : 1);
@@ -36,7 +36,7 @@ const TileForm = ({ onClose, handleRefresh, tile = null }) => {
             .then((response) => {
                 if (response.ok) {
                     handleRefresh();
-                    toast.success("Tile created")
+                    toast.success("Tile created");
                     onClose();
                 } else {
                     console.error("Error:", response.statusText);
@@ -63,7 +63,7 @@ const TileForm = ({ onClose, handleRefresh, tile = null }) => {
             .then((response) => {
                 if (response.ok) {
                     handleRefresh();
-                    toast.success("Tile updated")
+                    toast.success("Tile updated");
                     onClose();
                 } else {
                     console.error("Error:", response.statusText);

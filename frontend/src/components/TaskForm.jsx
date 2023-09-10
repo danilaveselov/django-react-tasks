@@ -6,12 +6,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import InputLabel from '@mui/material/InputLabel';
+import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 // Other
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const TaskForm = ({ onClose, handleRefresh, tile, task = null }) => {
     const [title, setTitle] = useState(task ? task.title : "");
@@ -40,7 +40,7 @@ const TaskForm = ({ onClose, handleRefresh, tile, task = null }) => {
             .then((response) => {
                 if (response.ok) {
                     handleRefresh();
-                    toast.success("Task created")
+                    toast.success("Task created");
                     onClose();
                 } else {
                     console.error("Error:", response.statusText);
@@ -72,7 +72,7 @@ const TaskForm = ({ onClose, handleRefresh, tile, task = null }) => {
             .then((response) => {
                 if (response.ok) {
                     handleRefresh();
-                    toast.success("Task updated")
+                    toast.success("Task updated");
                     onClose();
                 } else {
                     console.error("Error:", response.statusText);

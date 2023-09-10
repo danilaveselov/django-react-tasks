@@ -6,10 +6,9 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 // Local Components
 import TileList from "./components/TileList";
 // Other
-import enGB from 'date-fns/locale/en-GB';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import enGB from "date-fns/locale/en-GB";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
     return (
