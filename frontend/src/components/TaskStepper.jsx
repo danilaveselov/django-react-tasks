@@ -13,6 +13,7 @@ import MobileStepper from "@mui/material/MobileStepper";
 import { useTheme } from "@mui/material/styles";
 // Component
 import TaskTypeAvatar from "./TaskTypeAvatar";
+import { toast } from 'react-toastify';
 
 const TaskStepper = ({ tasks, handleEdit, handleRefresh }) => {
     const theme = useTheme();
@@ -36,6 +37,7 @@ const TaskStepper = ({ tasks, handleEdit, handleRefresh }) => {
         })
             .then((response) => {
                 if (response.ok) {
+                    toast.success("Task removed")
                     handleRefresh();
                 } else {
                     console.error("Error:", response.statusText);
