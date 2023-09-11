@@ -71,7 +71,12 @@ $ yarn install
 # Start the application
 $ yarn start
 ```
-## Demo showcase
+
+## Functionality Overview
+![image](https://github.com/danilaveselov/django-react-tasks/assets/86387035/976dba0e-7209-47b4-b0d8-fa3c37336ac6)
+
+
+## Demo Showcase
 A brief overview of display features and how tiles get ordered by launch date.
 ![appoverview](https://github.com/danilaveselov/django-react-tasks/assets/86387035/489b1092-d37e-4378-9ae5-27ed293f63f8)
 
