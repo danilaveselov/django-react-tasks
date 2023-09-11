@@ -49,7 +49,12 @@ $ python backend/manage.py runserver
 Testing:
 
 ```bash
-# Run this command inside backend folder
+# Run these commands inside backend folder
+
+# flake8 testing to maintain code quality and follow PEP8 guidelines 
+$ flake8
+
+# Unit tests
 $ python manage.py test
 ```
 
