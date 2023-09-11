@@ -108,6 +108,9 @@ const TaskForm = ({ onClose, handleRefresh, tile, task = null }) => {
                             type="number"
                             fullWidth
                             margin="dense"
+                            inputProps={{
+                                min: 0
+                            }}
                         />
                         <TextField
                             value={description}
