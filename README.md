@@ -46,6 +46,13 @@ $ python backend/manage.py migrate
 $ python backend/manage.py runserver
 ```
 
+Testing:
+
+```bash
+# Run this command inside backend folder
+$ python manage.py test
+```
+
 ## Usage - Frontend
 
 
