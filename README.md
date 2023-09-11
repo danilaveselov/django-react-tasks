@@ -17,6 +17,9 @@ $ .venv\Scripts\activate
 # Install required requirements
 $ pip install -r requirements.txt
 
+# Run the migrations
+$ python backend\manage.py migrate
+
 # Run the project with
 $ python backend\manage.py runserver
 ```
@@ -35,6 +38,9 @@ $ .venv/bin/activate
 
 # Install required requirements
 $ pip install -r requirements.txt
+
+# Run the migrations
+$ python backend/manage.py migrate
 
 # Run the project with
 $ python backend/manage.py runserver
