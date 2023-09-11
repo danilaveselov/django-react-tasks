@@ -25,7 +25,11 @@ class Task(models.Model):
     order = models.PositiveSmallIntegerField()
     description = models.TextField()
     type = models.SmallIntegerField(choices=Type.choices)
-    tile = models.ForeignKey(Tile, related_name="tasks", on_delete=models.CASCADE)
+    tile = models.ForeignKey(
+        Tile,
+        related_name="tasks",
+        on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return f'{self.pk} - {self.title}'

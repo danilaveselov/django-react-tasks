@@ -3,6 +3,7 @@ from rest_framework.test import APIClient
 from .models import Tile, Task
 from .serializers import TileSerializer, TaskSerializer
 
+
 class TileSerializerTest(TestCase):
     # Setting up our test data
     def setUp(self):
@@ -15,7 +16,7 @@ class TileSerializerTest(TestCase):
     def test_tile_serializer_valid_data(self):
         serializer = TileSerializer(data=self.tile_data)
         self.assertTrue(serializer.is_valid())
-    
+
     # This one doesn't
     def test_tile_serializer_invalid_status(self):
         self.tile_data['status'] = 4
