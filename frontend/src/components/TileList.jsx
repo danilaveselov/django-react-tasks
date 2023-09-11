@@ -28,6 +28,7 @@ import TileStatusAvatar from "./TileStatusAvatar";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 
+// Displays a list of tiles
 const TileList = () => {
     const [filterStatus, setFilterStatus] = useState("0");
     const [tiles, setTiles] = useState([]);
@@ -40,6 +41,7 @@ const TileList = () => {
         fetch("http://localhost:8000/api/tiles/")
             .then((response) => response.json())
             .then((data) => {
+                // That's where sorting by date is implemented. Most recent/future tiles appear first.
                 data.sort((a, b) => new Date(b.launch_date) - new Date(a.launch_date));
                 setTiles(data);
             })

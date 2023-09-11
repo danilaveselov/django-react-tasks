@@ -10,6 +10,8 @@ import enGB from "date-fns/locale/en-GB";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+// Root component. LocalizationProvider is required by @mui/x-date-pickers.
+// ToastContainer to display our pop-up messages when an action has succeeded.
 function App() {
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>

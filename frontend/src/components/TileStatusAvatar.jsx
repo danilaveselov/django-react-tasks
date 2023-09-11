@@ -10,6 +10,7 @@ import StarIcon from "@mui/icons-material/Star";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 
+// Allows us to render an avatar component based on status value provided.
 const TileStatusAvatar = ({ status }) => {
     switch (status) {
         case 1:

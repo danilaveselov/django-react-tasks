@@ -13,6 +13,7 @@ import TextField from "@mui/material/TextField";
 // Other
 import { toast } from "react-toastify";
 
+// This dialog form is allows us to create or edit tasks.
 const TaskForm = ({ onClose, handleRefresh, tile, task = null }) => {
     const [title, setTitle] = useState(task ? task.title : "");
     const [order, setOrder] = useState(task ? task.order : 1);

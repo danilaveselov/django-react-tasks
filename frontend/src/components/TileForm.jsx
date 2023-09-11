@@ -13,6 +13,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 
+// This dialog form allows us to create or edit tiles.
 const TileForm = ({ onClose, handleRefresh, tile = null }) => {
     const [status, setStatus] = useState(tile ? tile.status : 1);
     const [launchDate, setLaunchDate] = useState(tile ? new Date(tile.launch_date) : null);

@@ -15,9 +15,11 @@ import { useTheme } from "@mui/material/styles";
 import TaskTypeAvatar from "./TaskTypeAvatar";
 import { toast } from "react-toastify";
 
+// This component appears inside the tile and allows us to switch between tasks.
 const TaskStepper = ({ tasks, handleEdit, handleRefresh }) => {
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
+    // Sorting the tasks based on order value in ascending order.
     const sortedTasks = tasks.sort((a, b) => a.order - b.order);
 
     const handleNext = () => {

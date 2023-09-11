@@ -8,6 +8,7 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 
+// Renders avatar component based on type value.
 const TaskTypeAvatar = ({ type }) => {
     switch (type) {
         case 1:
